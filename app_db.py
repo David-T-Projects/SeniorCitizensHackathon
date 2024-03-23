@@ -11,4 +11,4 @@ with app.app_context():
 
     # Prepping the database
     db.drop_all()
-    #db.create_all()
+    db.create_all()
