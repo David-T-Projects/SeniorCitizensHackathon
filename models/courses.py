@@ -10,4 +10,3 @@ class Course(db.Model):
     department = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(5000))
     credits = db.Column(db.Float)
-
