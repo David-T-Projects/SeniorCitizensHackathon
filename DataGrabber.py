@@ -12,15 +12,16 @@ driver.get(url)
 
 # Wait for the dynamically generated content to appear (adjust timeout and conditions as needed)
 try:
-    # Wait for the element with ID "kuali-catalog" to appear
+    # Wait for the element with catalog to appear
     catalog_element = WebDriverWait(driver, 30).until(
         EC.presence_of_element_located((By.CLASS_NAME, "style__groups___NnCy6"))
     )
+    
+    # Get the catalog element
+    div_element = driver.find_element(By.CLASS_NAME, "style__groups___NnCy6") 
 
     # Find all list elements
     list_elements = driver.find_elements(By.CLASS_NAME, "style__collapsibleBox___15waq")
-
-    div_element = driver.find_element(By.ID, "kuali-catalog")  # Replace "your_div_id" with the actual ID of the div
 
     # Find all anchor elements within the div
     link_elements = div_element.find_elements(By.TAG_NAME, "a")
@@ -46,6 +47,28 @@ try:
         
         # Do something with the extracted information (print it in this example)
     print(list_dept)
+
+    for link in links:
+        # Get the URL of the link
+        url = link
+
+        # Visit the link
+        driver.get(url)
+
+        catalog_element = WebDriverWait(driver, 30).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "style__collapsibleBox___15waq"))
+        )
+
+        # Get the catalog element
+        div_element = driver.find_element(By.CLASS_NAME, "style__collapsibleBox___15waq") 
+
+        # Find all anchor elements within the div
+        link_elements = div_element.find_elements(By.TAG_NAME, "a")
+
+        links = [link.get_attribute("href") for link in link_elements]
+        
+        # Example: Extract the text from a specific element
+        print(links)
 
     
 
