@@ -15,7 +15,7 @@ from sqlalchemy import *
 class Majors(db.Model):
     __tablename__ = 'majors'
 
-    name = db.Column(db.String(255), nullable = False)
+    name = db.Column(db.String(255), nullable = False, )
     creditHours = db.Column(db.Integer, nullable = False)
     degreeType = db.Column(db.String(255), nullable = False)
     concentration = db.Column(db.ARRAY(String(255)), nullable = False)
