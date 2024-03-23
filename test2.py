@@ -40,11 +40,12 @@ try:
         # Extract information from each list element
         list_content = element.text
 
-        if list_content != "keyboard_arrow_down":
-            pass
+        list_content= list_content.split('\n')[0]
+        
+        list_dept.append(list_content)
         
         # Do something with the extracted information (print it in this example)
-        print(list_content)
+    print(list_dept)
 
     
 
