@@ -1,29 +1,78 @@
+import requests
+from bs4 import BeautifulSoup as bs
+
+
+#Pass it a url, the function will go into that page, then transform that page into parseable html soup 
+def goDeeper(pureUrl):
+    response = requests.get(pureUrl)
+
+    # Check if the request was successful (status code 200)
+    if response.status_code == 200:
+        # Get the HTML content from the response
+        rss_content = response.text
+        # print(rss_content)
+        
+        # Parse the RSS feed content with BeautifulSoup
+        htmlSoup = bs(rss_content, 'html.parser')
+        return htmlSoup
+
+    else:
+        linkError = "Link " + pureUrl + " was unresponsive"
+        return linkError
+    exit
+#//end goDeeper()
+
 
 
 # URL of the website you want to fetch HTML from
+baseUrl = "https://www.uah.edu"
 url = "https://www.uah.edu/cgi-bin/schedule.pl"
 
-# Send a GET request to the URL
-response = requests.get(url)
+#Open up the first url
+semHtmlSoup = goDeeper(url)
 
-# Check if the request was successful (status code 200)
-if response.status_code == 200:
-    # Get the HTML content from the response
-    rss_content = response.text
-    print(rss_content)
+# Extract the href attribute from each link element
+semHrefAtts = semHtmlSoup.select('a') 
+
+# Ensure 'href' attribute exists before accessing
+semesterLinks = [link.get('href') for link in semHrefAtts if link.get('href')]  
+
+
+#Go through the first three links and pursue them until we get their all their data
+# for i in range(min(3, len(semesterLinks))):
+i = 0
+while i < 3:
     
-    # Parse the RSS feed content with BeautifulSoup
-    soup = BeautifulSoup(rss_content, 'xml')
+    #Fetch the list of all the departments and their links
+    dptHtmlSoup = goDeeper(semesterLinks[i])
 
+    print(dptHtmlSoup)
 
     # Extract the href attribute from each link element
-    web_links = soup.select('a') 
+    dptHrefAtts = dptHtmlSoup.select('a') 
 
-    actual_web_links = [link['href'] for link in web_links] 
+    # Ensure 'href' attribute exists before accessing
+    dptLinks = [dptLink.get('href') for dptLink in dptHrefAtts if dptLink.get('href')]  
 
-    # Print the list of links
-    print("List of links:")
-    for link in web_links:
-        print(link)
+    #For each departments linked page within this semester (iteration of the while loop)
+    for dptLink in dptLinks:
+    
+        #The actual html of the course page
+        courseHtmlSoup = goDeeper(baseUrl+dptLink)
+        #print(courseHtmlSoup,"\n\n\n")
+
+
+
+        #Iterate to the next dpt page
+        i += 1
+
+
+
+    #Iterate to the next semester page
+    i += 1
+
+
+#parsedLink1 = web_links[0]
+
 
 
