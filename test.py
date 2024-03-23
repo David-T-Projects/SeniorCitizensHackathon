@@ -2,8 +2,9 @@
 from bs4 import BeautifulSoup
 import requests
 
+
 # URL of the website you want to fetch HTML from
-url = "https://catalog.uah.edu/#/courses?isPrint=true"
+url = "https://uah.campuslabs.com/engage/events.rss"
 
 # Send a GET request to the URL
 response = requests.get(url)
@@ -11,31 +12,32 @@ response = requests.get(url)
 # Check if the request was successful (status code 200)
 if response.status_code == 200:
     # Get the HTML content from the response
-    html_content = response.text
-    #print(html_content)
+    rss_content = response.text
+    print(rss_content)
     
-    # Parse the HTML content with BeautifulSoup
-    soup = BeautifulSoup(html_content, 'html.parser')
-    
-    # Find all <div> tags with a specific class
-    divs_with_class = soup.find_all('div', id='main')
+    # Parse the RSS feed content with BeautifulSoup
+    soup = BeautifulSoup(rss_content, 'xml')
 
-    
-    print(divs_with_class)
-    
-    # Check if any <div> tags with the specified class were found
-    if divs_with_class:
-        # Extract data or perform operations on the found <div> tags
-        for div in divs_with_class:
-            # Example: Print the text content of each <div> tag
-            print(div.text)
+    # Find the description element
+    description = soup.find('description')
+
+    # Extract the CDATA content from the description element
+    cdata_content = description.string.strip()
+
+    # Parse the CDATA content as XML
+    item_soup = BeautifulSoup(cdata_content, 'xml')
+
+    # Find the div with class "p-name summary"
+    div_with_class = item_soup.find('div', class_='p-name summary')
+
+    # Check if the div with class is found
+    if div_with_class:
+        print("Found the div with class 'p-name summary':")
+        print(div_with_class.text)
     else:
-        print("No <div> tags with the specified class were found.")
-else:
-    print("Failed to fetch HTML. Status code:", response.status_code)
+        print("No div with class 'p-name summary' was found.")
 
 
-import scrapy
 
 
 
