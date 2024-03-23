@@ -3,19 +3,6 @@ from flask import Flask
 from extensions import db
 from sqlalchemy import *
 
-'''
-"RSO_Events": {
-      "Name": "String",
-      "Date": "String",
-      "Time": "String",
-      "Location": "String",
-      "RSO": "String",
-      "Description": "String",
-      "Themes": [{"ThemeName": "String"}],
-      "Categories": [{"CategoryName": "String"}],
-      "Perks": [{"PerkName": "String"}]
-'''
-
 class Course(db.Model):
     __tablename__ = 'course'
 

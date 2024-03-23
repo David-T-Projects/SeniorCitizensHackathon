@@ -3,13 +3,6 @@ from flask import Flask
 from extensions import db
 from sqlalchemy import *
 
-#  "Colleges": {
-#       "College": {
-#         "Name": "String",
-#         "Dept": "String",
-#         "Scholarships": [{"ScholarshipName": "String"}]
-#         }
-
 
 class Colleges(db.Model):
     __tablename__ = 'colleges'

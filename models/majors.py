@@ -3,15 +3,6 @@ from flask import Flask
 from extensions import db
 from sqlalchemy import *
 
-# "Majors": {
-#       "Name": "String",
-#       "# of Credit hours": "Short Int",
-#       "Degree Type": "String (split from Name)",
-#       "Concentration": [{"ConcentrationName": "String"}],
-#       "Department": "String",
-#       "College": "String"
-#     },
-
 class Majors(db.Model):
     __tablename__ = 'majors'
 
