@@ -10,3 +10,6 @@ class Course(db.Model):
     department = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(5000))
     credits = db.Column(db.Float)
+
+    def __repr__(self):
+        return f'<Course {self.name}>'
