@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as bs
 
-
+#Test
 #Pass it a url, the function will go into that page, then transform that page into parseable html soup 
 def goDeeper(pureUrl):
     response = requests.get(pureUrl)
