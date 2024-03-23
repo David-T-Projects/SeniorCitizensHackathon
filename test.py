@@ -1,3 +1,4 @@
+
 from bs4 import BeautifulSoup
 import requests
 
@@ -17,7 +18,10 @@ if response.status_code == 200:
     soup = BeautifulSoup(html_content, 'html.parser')
     
     # Find all <div> tags with a specific class
-    divs_with_class = soup.find_all('div', _id='UAH-kuali-section')
+    divs_with_class = soup.find_all('div', id='main')
+
+    
+    print(divs_with_class)
     
     # Check if any <div> tags with the specified class were found
     if divs_with_class:
@@ -29,6 +33,9 @@ if response.status_code == 200:
         print("No <div> tags with the specified class were found.")
 else:
     print("Failed to fetch HTML. Status code:", response.status_code)
+
+
+import scrapy
 
 
 
