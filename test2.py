@@ -33,10 +33,15 @@ try:
     for link in links:
         print(link)
 
+    list_dept = []
+
     # Iterate through the list elements
     for element in list_elements:
         # Extract information from each list element
         list_content = element.text
+
+        if list_content != "keyboard_arrow_down":
+            pass
         
         # Do something with the extracted information (print it in this example)
         print(list_content)
