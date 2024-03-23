@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from extensions import db
 
-class Course(db.Model):
+class CourseListings(db.Model):
     __tablename__ = 'course'
 
     sectionType = db.Column(db.String(255), nullable=False)
