@@ -65,10 +65,15 @@ try:
         # Find all anchor elements within the div
         link_elements = div_element.find_elements(By.TAG_NAME, "a")
 
-        links = [link.get_attribute("href") for link in link_elements]
+        # These are the course links
+        dept_links = [link.get_attribute("href") for link in link_elements]
         
-        # Example: Extract the text from a specific element
-        print(links)
+        for link in link_elements:
+            course_name = link.text
+            print(course_name)
+
+        
+        
 
     
 
