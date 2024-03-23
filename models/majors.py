@@ -18,7 +18,7 @@ class Majors(db.Model):
     name = db.Column(db.String(255), nullable = False)
     creditHours = db.Column(db.Integer, nullable = False)
     degreeType = db.Column(db.String(255), nullable = False)
-    concentration = db.Column(db.ARRAY(Integer), nullable = False)
+    concentration = db.Column(db.ARRAY(String(255)), nullable = False)
     department = db.Column(db.String(255), nullable = False)
     college = db.Column(db.String(255), nullable = False)
 
