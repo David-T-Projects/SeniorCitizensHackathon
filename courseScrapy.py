@@ -41,12 +41,12 @@ semesterLinks = [link.get('href') for link in semHrefAtts if link.get('href')]
 #Go through the first three links and pursue them until we get their all their data
 # for i in range(min(3, len(semesterLinks))):
 i = 0
-while i < 3:
+while i < 1:
     
     #Fetch the list of all the departments and their links
     dptHtmlSoup = goDeeper(semesterLinks[i])
 
-    print(dptHtmlSoup)
+    #print(dptHtmlSoup)
 
     # Extract the href attribute from each link element
     dptHrefAtts = dptHtmlSoup.select('a') 
@@ -54,14 +54,20 @@ while i < 3:
     # Ensure 'href' attribute exists before accessing
     dptLinks = [dptLink.get('href') for dptLink in dptHrefAtts if dptLink.get('href')]  
 
+    dptLinks.pop()
+
     #For each departments linked page within this semester (iteration of the while loop)
     for dptLink in dptLinks:
     
         #The actual html of the course page
         courseHtmlSoup = goDeeper(baseUrl+dptLink)
-        #print(courseHtmlSoup,"\n\n\n")
 
+        #Print the text on this page
+        print(courseHtmlSoup,"\n\n\n")
 
+        #-----------------------
+        #PARSER TO THE DB GOES HERE
+        #-----------------------
 
         #Iterate to the next dpt page
         i += 1
