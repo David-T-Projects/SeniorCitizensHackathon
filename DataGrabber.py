@@ -75,11 +75,6 @@ try:
 
         print(list_courses)
 
-        
-        
-
-    
-
 finally:
     # Remember to close the WebDriver when you're done
     driver.quit()
