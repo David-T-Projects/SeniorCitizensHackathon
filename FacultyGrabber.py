@@ -26,7 +26,7 @@ chrome_options.add_argument('--headless')
 # Initialize the WebDriver
 driver = webdriver.Chrome(options=chrome_options)
 
-with open('links.txt', 'r') as file:
+with open('faculty_links.txt', 'r') as file:
     links = file.readlines()
 
 for link in links:
