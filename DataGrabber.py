@@ -92,7 +92,3 @@ def main():
             list_courses.append(course_name)
 
         print(list_courses)
-
-finally:
-    # Remember to close the WebDriver when you're done
-    driver.quit()
