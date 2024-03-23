@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from extensions import db
 from sqlalchemy import *
-#test
+
 #    "Faculty": {
 #       "Name": "String",
 #       "Department": "String",
