@@ -82,13 +82,3 @@ def main():
     finally:
         # Remember to close the WebDriver when you're done
         driver.quit()
-
-        # These are the course links
-        dept_links = [link.get_attribute("href") for link in link_elements]
-        
-        list_courses = []
-        for link in link_elements:
-            course_name = link.text
-            list_courses.append(course_name)
-
-        print(list_courses)
