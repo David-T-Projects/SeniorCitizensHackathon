@@ -1,17 +1,12 @@
 from flask import *
 from datetime import time
 from extensions import db
-<<<<<<< HEAD
 import DeptGrabber
 import ProgramGrabber
 from models.courses import Course
 from models.Colleges import Colleges
 from models.department import Department
-
-=======
-from DataGrabber import scrape_course_information
 from courseScrapy import scrape_schedule_information
->>>>>>> main
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
@@ -24,7 +19,6 @@ def getAllCourses():
     courses_data = [{'name': course.name, 'department': course.department_name} for course in courses]
     return jsonify(courses_data)
 
-<<<<<<< HEAD
 @app.route('/colleges')
 def getAllColleges():
     colleges = Colleges.query.all() #Query all colleges from the database
@@ -57,14 +51,7 @@ if __name__ == '__main__':
         db.create_all()
         DeptGrabber.getCourses()
         ProgramGrabber.getPrograms()
+        scrape_schedule_information()
         
     # Start Flask server after database preparation
     app.run(debug=True, use_reloader=False)
-=======
-    # Prepping the database
-    db.drop_all()
-    db.create_all()
-    scrape_course_information()
-    scrape_schedule_information()
-    print("courses database populated")
->>>>>>> main
