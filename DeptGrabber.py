@@ -5,8 +5,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from extensions import db
 from models.courses import Course
 from models.department import Department
+from selenium.webdriver.chrome.options import Options
 
 def getCourses():
+
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
     # Initialize a WebDriver (make sure you have the appropriate driver installed and in your PATH)
     driver = webdriver.Chrome()  # Change this to the appropriate WebDriver for your browser
 

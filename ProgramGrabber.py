@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from extensions import db
 from models.Colleges import Colleges
 from models.majors import Majors
+from selenium.webdriver.chrome.options import Options
 
 def populateMajors(college, program,id):
     college_trimmed = college.replace("College of", " ")
@@ -30,6 +31,11 @@ def populateMajors(college, program,id):
 
     
 def getPrograms():
+
+
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+
     # Initialize a WebDriver (make sure you have the appropriate driver installed and in your PATH)
     driver = webdriver.Chrome()  # Change this to the appropriate WebDriver for your browser
 

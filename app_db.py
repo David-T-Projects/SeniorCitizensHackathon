@@ -69,6 +69,17 @@ def getAllCourseListings():
                     for course_listing in course_listings]
     return jsonify(course_data)
 
+@app.route('/')
+def list_endpoints():
+    # Define a list of endpoint URLs
+    endpoints = [
+        '/department',
+        '/courses',
+        '/colleges',
+        '/courselistings'
+        # Add more endpoints as needed
+    ]
+    return render_template('endpoints.html', endpoints=endpoints)
 
 if __name__ == '__main__':
     with app.app_context():
@@ -83,4 +94,4 @@ if __name__ == '__main__':
 
         
     # Start Flask server after database preparation
-    app.run(debug=True, use_reloader=False)
+    app.run(debug=True, use_reloader=False, port = 5001)
