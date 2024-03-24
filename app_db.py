@@ -23,7 +23,6 @@ if __name__ == '__main__':
         db.create_all()
         DeptGrabber.getCourses()
         ProgramGrabber.getPrograms()
-
-    
+        
     # Start Flask server after database preparation
     app.run(debug=True, use_reloader=False)
