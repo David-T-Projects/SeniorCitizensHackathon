@@ -16,7 +16,7 @@ class Faculty(db.Model):
 
     name = db.Column(db.String(255), nullable = False, primary_key = True)
     department = db.Column(db.String(255), nullable = False, primary_key = True)
-    positions = db.Column(db.ARRAY(String(255)), nullable = False)
+    positions = db.Column(String(255), nullable = False)
     officeLocation = db.Column(db.String(255))
     phoneNumber = db.Column(db.String(255))    #Not every faculty member seems to have a phone # attached
     emailAddress = db.Column(db.String(255))

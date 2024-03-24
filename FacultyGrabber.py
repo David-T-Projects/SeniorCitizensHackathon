@@ -290,20 +290,22 @@ def getFaculty(url):
         db.session.add(facultyEntry)
         db.session.commit()
 
-chrome_options = Options()
-chrome_options.add_argument('--headless')
+def populateFaculty():
 
-# Initialize the WebDriver
-driver = webdriver.Chrome(options=chrome_options)
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
 
-with open('faculty_links.txt', 'r') as file:
-    links = file.readlines()
+    # Initialize the WebDriver
+    driver = webdriver.Chrome(options=chrome_options)
 
-for link in links:
-    getFaculty(link)
+    with open('faculty_links.txt', 'r') as file:
+        links = file.readlines()
 
-# Close the WebDriver
-driver.quit()
+    for link in links:
+        getFaculty(link)
+
+    # Close the WebDriver
+    driver.quit()
 
 
 

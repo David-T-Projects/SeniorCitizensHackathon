@@ -3,6 +3,7 @@ from datetime import time
 from extensions import db
 import DeptGrabber
 import ProgramGrabber
+import FacultyGrabber
 from models.courses import Course
 from models.Colleges import Colleges
 from models.department import Department
@@ -66,6 +67,7 @@ if __name__ == '__main__':
         db.create_all()
         DeptGrabber.getCourses()
         ProgramGrabber.getPrograms()
+        FacultyGrabber.populateFaculty()
         scrape_schedule_information()
         
     # Start Flask server after database preparation
