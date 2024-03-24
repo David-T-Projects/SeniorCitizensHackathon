@@ -9,6 +9,9 @@ class Colleges(db.Model):
 
     name = db.Column(db.String(255), nullable = False, primary_key = True)
     
+    # department = db.relationship('Department', uselist=False, backref='department', lazy=True)
+    # department_name = db.Column(db.String(255), db.ForeignKey('department.name'), nullable=True)
+
     
     #department = db.Column(db.ARRAY(String(255)), nullable = False)
     

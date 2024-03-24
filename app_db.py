@@ -4,6 +4,9 @@ from extensions import db
 import DeptGrabber
 import ProgramGrabber
 from models.courses import Course
+from models.Colleges import Colleges
+from models.department import Department
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
@@ -17,14 +20,29 @@ def getAllCourses():
     return jsonify(courses_data)
 
 @app.route('/colleges')
+def getAllColleges():
+    colleges = Colleges.query.all() #Query all colleges from the database
+    #convert the colleges to a list of dictionaries for JSON serialization
+    college_data = [{'name': colleges.name} for colleges in colleges]
+    return jsonify(college_data)
 
-@app.route('/majors')
+# @app.route('/majors')
 
 @app.route('/department')
+#    "Department": {
+#       "Name": "String",
+#       "abbreviation": "String",
+#       "college": "String",
 
-@app.route('/faculty')
+def getAllDepartments():
+    departments = Department.query.all()
+    #Convert the departments to a list of dictionaries for JSON serialization
+    department_data = [{'name':departments.name, 'abbreviation':departments.abbreviation, 'college':departments.college_name} for departments in departments]
+    return jsonify(department_data)
 
-@app.route('/events')
+# @app.route('/faculty')
+
+# @app.route('/events')
 
 if __name__ == '__main__':
     with app.app_context():
