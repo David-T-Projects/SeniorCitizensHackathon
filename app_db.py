@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import *
 from datetime import time
 from extensions import db
 import DataGrabber
@@ -14,6 +14,16 @@ def getAllCourses():
     # Convert courses to a list of dictionaries for JSON serialization
     courses_data = [{'name': course.name, 'department': course.department_name} for course in courses]
     return jsonify(courses_data)
+
+@app.route('/colleges')
+
+@app.route('/majors')
+
+@app.route('/department')
+
+@app.route('/faculty')
+
+@app.route('/events')
 
 if __name__ == '__main__':
     with app.app_context():
