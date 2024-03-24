@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from datetime import time
 from extensions import db
 import DataGrabber
-from models.Courses import Course
+from models.courses import Course
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
