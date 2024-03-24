@@ -9,7 +9,7 @@ from extensions import db
 from models import faculty
 
 
-def getFaculty(url,id, driver):
+def getFaculty(url, driver):
     driver.get(url)
 
     # Find the div element
@@ -304,7 +304,7 @@ def populateFaculty():
         links = file.readlines()
 
     for link in links:
-        getFaculty(link, id, driver)
+        getFaculty(link, driver)
 
     # Close the WebDriver
     driver.quit()

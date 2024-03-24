@@ -8,6 +8,7 @@ from models.courses import Course
 from models.Colleges import Colleges
 from models.department import Department
 from models.courseListings import CourseListings
+from models.majors import Majors
 from models.faculty import Faculty
 from _grabbers.CourseGrabber import scrape_schedule_information
 
@@ -33,7 +34,14 @@ def getAllColleges():
     return render_template('colleges.html', data=college_data)
 
 
-# @app.route('/majors')
+@app.route('/majors')
+def getAllMajors():
+    majors = Majors.query.all()
+    major_data = [{'name': major.name,
+                   'program type': major.degreeType,
+                   'college': major.college} for major in majors]
+    return jsonify(major_data)
+    
 
 @app.route('/department')
 #    "Department": {
@@ -58,8 +66,6 @@ def getAllFaculty():
                      for fac in faculty]
     # return jsonify(faculty_data)
     return render_template('faculty.html', data=faculty_data)
-
-# @app.route('/events')
 
 @app.route('/courselistings')
 def getAllCourseListings():

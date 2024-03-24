@@ -8,6 +8,7 @@ class Colleges(db.Model):
     __tablename__ = 'colleges'
 
     name = db.Column(db.String(255), nullable = False, primary_key = True)
+    short_form = db.Column(db.String(255))
     
     # department = db.relationship('Department', uselist=False, backref='department', lazy=True)
     # department_name = db.Column(db.String(255), db.ForeignKey('department.name'), nullable=True)

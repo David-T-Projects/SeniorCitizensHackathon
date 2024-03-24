@@ -7,6 +7,23 @@ from models.Colleges import Colleges
 from models.majors import Majors
 from selenium.webdriver.chrome.options import Options
 
+def getShortForm(name):
+    if 'Business' in name :
+        return 'business'
+    elif 'Education' in name:
+        return 'education'
+    elif 'Science' in name:
+        return 'science'
+    elif 'Engineering' in name:
+        return 'eng'
+    elif 'Honors' in name:
+        return 'honors'
+    elif 'Humanities' in name:
+        return 'ahs'
+    else:
+        return None
+
+
 def populateMajors(college, program,id):
     college_trimmed = college.replace("College of", " ")
     college_trimmed = college_trimmed.strip()
@@ -66,7 +83,6 @@ def getPrograms():
             print(link)
 
         list_colleges = []
-        college_count = 0
         
         # Iterate through the list elements
         for div in div_elements:
