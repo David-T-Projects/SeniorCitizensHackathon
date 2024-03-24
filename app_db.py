@@ -8,7 +8,7 @@ from models.courses import Course
 from models.Colleges import Colleges
 from models.department import Department
 from models.courseListings import CourseListings
-from courseScrapy import scrape_schedule_information
+from CourseGrabber import scrape_schedule_information
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
@@ -59,6 +59,17 @@ def getAllCourseListings():
                     for course_listing in course_listings]
     return jsonify(course_data)
 
+@app.route('/')
+def list_endpoints():
+    # Define a list of endpoint URLs
+    endpoints = [
+        '/department',
+        '/courses',
+        '/colleges',
+        '/courselistings'
+        # Add more endpoints as needed
+    ]
+    return render_template('endpoints.html', endpoints=endpoints)
 
 if __name__ == '__main__':
     with app.app_context():
