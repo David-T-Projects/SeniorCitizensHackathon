@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from extensions import db
 from models.courses import Course
+from models.department import Department
 
 def getCourses():
     # Initialize a WebDriver (make sure you have the appropriate driver installed and in your PATH)
@@ -47,6 +48,10 @@ def getCourses():
             list_content= list_content.split('\n')[0]
             
             list_dept.append(list_content)
+            
+            db.session.add(Department(name=list_content))
+
+        print(list_dept)
 
         i = 0
         for link in links:
@@ -75,7 +80,7 @@ def getCourses():
                 courseID = parts[0].strip(' ')
                 name = parts[1].strip(' ')
                 department = list_dept[i]
-                course_entry = Course(courseID = courseID, name = name, department = department, description = None, credits = None)
+                course_entry = Course(courseID = courseID, name = name, department_name = department, description = None, credits = None)
                 db.session.add(course_entry)
                 db.session.commit()
             i+=1
@@ -83,3 +88,4 @@ def getCourses():
     finally:
         # Remember to close the WebDriver when you're done
         driver.quit()
+

@@ -12,7 +12,7 @@ db.init_app(app)
 def getAllCourses():
     courses = Course.query.all()  # Query all courses from the database
     # Convert courses to a list of dictionaries for JSON serialization
-    courses_data = [{'name': course.name, 'department': course.department} for course in courses]
+    courses_data = [{'name': course.name, 'department': course.department_name} for course in courses]
     return jsonify(courses_data)
 
 if __name__ == '__main__':
