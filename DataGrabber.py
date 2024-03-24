@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from extensions import db
 from models import courses
 
-def main():
+def scrape_course_information():
     # Initialize a WebDriver (make sure you have the appropriate driver installed and in your PATH)
     driver = webdriver.Chrome()  # Change this to the appropriate WebDriver for your browser
 
