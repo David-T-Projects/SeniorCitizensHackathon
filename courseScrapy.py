@@ -5,7 +5,6 @@ from models.courseListings import CourseListings
 
 def populateDBCall(passed_str, department, id_num):
 
-    print("THIS IS BEFORE START OF POPULATE")
     assignList = []
     temp = ''
     index = 0
@@ -27,8 +26,6 @@ def populateDBCall(passed_str, department, id_num):
                 assignList.append(temp)
                 temp = ''
         index += 1
-    print(assignList)
-
 
     sectionType = str(assignList.pop(0))
     CRN = int(assignList.pop(0))
