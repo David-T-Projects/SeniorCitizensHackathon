@@ -5,10 +5,11 @@ from extensions import db
 class CourseListings(db.Model):
     __tablename__ = 'course_listings'
 
+    id = db.Column(db.Integer,primary_key = True)
     sectionType = db.Column(db.String(255), nullable=False)
     CRN = db.Column(db.Integer, nullable=False)
-    department = db.Column(db.String(255), primary_key=True)
-    course = db.Column(db.String(255), primary_key=True)
+    department = db.Column(db.String(255), nullable=False)
+    course = db.Column(db.String(255), nullable=False)
     title = db.Column(db.String(255), nullable=False)
     credit = db.Column(db.Float)
     max_enrollment = db.Column(db.Integer, nullable=False)

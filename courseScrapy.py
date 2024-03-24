@@ -1,9 +1,9 @@
 import requests
 from bs4 import BeautifulSoup as bs
 from extensions import db
-from models import courseListings
+from models.courseListings import CourseListings
 
-def populateDBCall(passed_str, department):
+def populateDBCall(passed_str, department, id_num):
 
     print("THIS IS BEFORE START OF POPULATE")
     assignList = []
@@ -103,37 +103,16 @@ def populateDBCall(passed_str, department):
         credit= float(assignList.pop())
 
 
-    print(type(assignList))
-
     title = ' '.join(assignList)
-    title = str(title)
+    title_str = str(title)
 
-    print((sectionType))
-    print((CRN))
-    print((course))
-    print((instructor))
-    print((room))
-    print((building))
-    print((end))
-    print((start))
-    print((days))
-    print((wait_list))
-    print((availability))
-    print((enrollment))
-    print((max_enrollment))
-    print((credit))
-    print((title))
-
-
-    print("THIS IS BEFORE COMMIT")
-    course_entry = courseListings.CourseListings(sectionType = sectionType, CRN = CRN, department = department, course=course, title=title, 
+    course_entry = CourseListings(id = id_num, sectionType = sectionType, CRN = CRN, department = department, course=course, title=title_str, 
                                   credit=credit, max_enrollment=max_enrollment, enrollment=enrollment, availability=availability, 
                                   wait_list=wait_list, days=days, start=start, end=end, building=building, room=room, instructor=instructor)
-    print("COMMIT CREATED")
+
     db.session.add(course_entry)
-    print("ADDED TO DB")
-    #db.session.commit()
-    print("SUCCESSFUL COMMIT")
+    db.session.commit()
+
 
 
 
@@ -176,6 +155,7 @@ def scrape_schedule_information():
     #Go through the first three links and pursue them until we get their all their data
     # for i in range(min(3, len(semesterLinks))):
     i = 0
+    k = 0
     while i < 1:
         
         #Fetch the list of all the departments and their links
@@ -210,18 +190,10 @@ def scrape_schedule_information():
             j = 11
 
             while(data_arr[j][0] != "<"):
-                populateDBCall(data_arr[j], department)
+                populateDBCall(data_arr[j], department[0], k)
                 j+=1
+                k+=1
                 
-
-            print("\n\n\n")
-            #print(courseHtmlSoup,"\n\n\n\n\n")
-
-            #-----------------------
-            #PARSER TO THE DB GOES HERE
-            #-----------------------
-
-            #Iterate to the next dpt page
             i += 1
 
 

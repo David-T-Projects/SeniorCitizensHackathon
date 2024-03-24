@@ -14,6 +14,6 @@ with app.app_context():
     # Prepping the database
     db.drop_all()
     db.create_all()
-    #scrape_course_information()
+    scrape_course_information()
     scrape_schedule_information()
     print("courses database populated")
