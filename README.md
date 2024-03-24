@@ -2,10 +2,10 @@
 UAH Hackathon 2024
 
 Authors:
-David Tollet
-Caleb Boss
-September Abbott
-Ben Morgan
+David Tollet,
+Caleb Boss,
+September Abbott,
+Ben Morgan,
 
 # Introduction
 Need information about UAH for your senior design project, personal use, or a HACKATHON? This is an API with various publically accessible data scraped directly from the UAH website.
