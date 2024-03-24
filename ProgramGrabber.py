@@ -6,7 +6,7 @@ from extensions import db
 from models.Colleges import Colleges
 from models.majors import Majors
 
-def populateMajors(college, program):
+def populateMajors(college, program,id):
     college_trimmed = college.replace("College of", " ")
     college_trimmed = college_trimmed.strip()
 
@@ -15,12 +15,14 @@ def populateMajors(college, program):
     name = program_arr[0]
     try:
         degree = program_arr[1]
-        degreeType = degree.split(")")
+        degreeType = degree.replace(")", " ")
+        degreeType = degreeType.strip()
         print(name + ' ' + degreeType)
-        new_program = Majors(name = name, degreeType = degreeType[0],college=college_trimmed)
+        new_program = Majors(name = name, degreeType = degreeType, id = id, college=college_trimmed)
     except:
         degreeType = None
-        new_program = Majors(name = name, degreeType=None , college=college_trimmed)
+        new_program = Majors(name = name, degreeType= None ,id = id, college=college_trimmed)
+    
     
     db.session.add(new_program)
     db.session.commit()
@@ -73,6 +75,7 @@ def getPrograms():
             db.session.commit()
 
         i = 0
+        j = 0
         for link in links:
             # Get the URL of the link
             url = link
@@ -99,8 +102,8 @@ def getPrograms():
                 content = element.text
                 
                 programs_list.append(content)
-                populateMajors(list_colleges[i], content)
-                
+                populateMajors(list_colleges[i], content,j)
+                j+=1
             i+=1
                 
 

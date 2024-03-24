@@ -8,6 +8,7 @@ class Majors(db.Model):
 
     name = db.Column(db.String(255), nullable = False, primary_key = True)
     degreeType = db.Column(db.String(255), default = "Major", primary_key=True)
+    id = db.Column(db.Integer, primary_key = True)
     #department_name = db.Column(db.String(255), nullable = False)
     college = db.Column(db.String(255), nullable = False)
 
