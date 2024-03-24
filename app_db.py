@@ -20,14 +20,18 @@ def getAllCourses():
     courses = Course.query.all()  # Query all courses from the database
     # Convert courses to a list of dictionaries for JSON serialization
     courses_data = [{'name': course.name, 'department': course.department_name} for course in courses]
-    return jsonify(courses_data)
+    # return jsonify(courses_data)
+    return render_template('courses.html', data=courses_data)
+
 
 @app.route('/colleges')
 def getAllColleges():
     colleges = Colleges.query.all() #Query all colleges from the database
     #convert the colleges to a list of dictionaries for JSON serialization
     college_data = [{'name': colleges.name} for colleges in colleges]
-    return jsonify(college_data)
+    # return jsonify(college_data)
+    return render_template('colleges.html', data=college_data)
+
 
 # @app.route('/majors')
 
@@ -36,23 +40,24 @@ def getAllColleges():
 #       "Name": "String",
 #       "abbreviation": "String",
 #       "college": "String",
-
 def getAllDepartments():
     departments = Department.query.all()
     #Convert the departments to a list of dictionaries for JSON serialization
-    department_data = [{'name':departments.name, 'abbreviation':departments.abbreviation, 'college':departments.college_name} for departments in departments]
-    return jsonify(department_data)
+    department_data = [{'name':departments.name} for departments in departments]
+
+    # return jsonify(department_data)
+    return render_template('departments.html', data=department_data)
 
 @app.route('/faculty')
 def getAllFaculty():
     faculty = Faculty.query.all()
-    faculty_data = [{'name':fac.name, 
-                     'Department':fac.department, 
+    faculty_data = [{'name':fac.name,  
                      'Position':fac.positions, 
-                     'Phone Number':fac.positions, 
+                     'Phone Number':fac.phoneNumber, 
                      'email':fac.emailAddress,} 
                      for fac in faculty]
-    return jsonify(faculty_data)
+    # return jsonify(faculty_data)
+    return render_template('faculty.html', data=faculty_data)
 
 # @app.route('/events')
 
@@ -67,7 +72,9 @@ def getAllCourseListings():
                     'end':course_listing.end,
                     'days':course_listing.days,}
                     for course_listing in course_listings]
-    return jsonify(course_data)
+    # return jsonify(course_data)
+    return render_template('courseListings.html', data=course_data)
+
 
 @app.route('/')
 def list_endpoints():
@@ -76,7 +83,8 @@ def list_endpoints():
         '/department',
         '/courses',
         '/colleges',
-        '/courselistings'
+        '/courselistings',
+        '/faculty'
         # Add more endpoints as needed
     ]
     return render_template('endpoints.html', endpoints=endpoints)

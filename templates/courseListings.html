@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Listings</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Course Listings</h1>
+    <a href="/">Back to Main Endpoint</a> <!-- Back button -->
+    <table id="course-listings-table">
+        <thead>
+            <tr>
+                <th>CRN</th>
+                <th>Course</th>
+                <th>Title</th>
+                <th>Max Enrollment</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Days</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course_listing in data %}
+            <tr>
+                <td>{{ course_listing.CRN }}</td>
+                <td>{{ course_listing.course }}</td>
+                <td>{{ course_listing.title }}</td>
+                <td>{{ course_listing.max_enrollment }}</td>
+                <td>{{ course_listing.start }}</td>
+                <td>{{ course_listing.end }}</td>
+                <td>{{ course_listing.days }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        // You can include JavaScript here if needed
+    </script>
+</body>
+</html>
