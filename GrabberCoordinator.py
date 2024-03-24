@@ -1,5 +1,5 @@
-import DeptGrabber
-import ProgramGrabber
+import _grabbers.DeptGrabber as DeptGrabber
+import _grabbers.ProgramGrabber as ProgramGrabber
 
 class Coordinator:
 
