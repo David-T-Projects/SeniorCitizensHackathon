@@ -21,7 +21,17 @@
 </head>
 <body>
     <h1>List of Majors</h1>
-    <a href="/">Back to Main Endpoint</a>
+    <a href="/">Back to overview</a>
+    <select id="collegeSelect" onchange="filterByCollege()">
+        <option value="">Select College</option>
+        {% set colleges = [] %}
+        {% for major in data %}
+            {% if major.college not in colleges %}
+                {% set _ = colleges.append(major.college) %}
+                <option value="{{ major.college }}">{{ major.college }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
     <table id="majors-table">
         <thead>
             <tr>
@@ -42,7 +52,24 @@
     </table>
 
     <script>
-        // You can include JavaScript here if needed
+        function filterByCollege() {
+            var select, filter, table, tr, td, i, txtValue;
+            select = document.getElementById("collegeSelect");
+            filter = select.value.toUpperCase();
+            table = document.getElementById("majors-table");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2]; // Index 2 for college column
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (filter === "" || txtValue.toUpperCase() === filter) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
     </script>
 </body>
 </html>
