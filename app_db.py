@@ -3,9 +3,11 @@ from datetime import time
 from extensions import db
 import DeptGrabber
 import ProgramGrabber
+import FacultyGrabber
 from models.courses import Course
 from models.Colleges import Colleges
 from models.department import Department
+from models.courseListings import CourseListings
 from courseScrapy import scrape_schedule_information
 
 app = Flask(__name__)
@@ -44,15 +46,31 @@ def getAllDepartments():
 
 # @app.route('/events')
 
+@app.route('/courselistings')
+def getAllCourseListings():
+    course_listings = CourseListings.query.all()
+    course_data = [{'CRN':course_listing.CRN,
+                    'course':course_listing.course, 
+                    'title':course_listing.title,
+                    'max_enrollment':course_listing.max_enrollment,
+                    'start':course_listing.start,
+                    'end':course_listing.end,
+                    'days':course_listing.days,}
+                    for course_listing in course_listings]
+    return jsonify(course_data)
+
+
 if __name__ == '__main__':
     with app.app_context():
         # Drop existing tables, create new ones, and populate data
         db.drop_all()
         db.create_all()
-        #DeptGrabber.getCourses()
+        DeptGrabber.getCourses()
         ProgramGrabber.getPrograms()
-        #scrape_schedule_information()
-        
+        scrape_schedule_information()
+        FacultyGrabber.populateFaculty()
+       
+
         
     # Start Flask server after database preparation
     app.run(debug=True, use_reloader=False)
