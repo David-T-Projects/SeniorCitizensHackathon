@@ -1,15 +1,15 @@
 from flask import *
 from datetime import time
 from extensions import db
-import DeptGrabber
-import ProgramGrabber
-import FacultyGrabber
+import _grabbers.DeptGrabber as DeptGrabber
+import _grabbers.ProgramGrabber as ProgramGrabber
+import _grabbers.FacultyGrabber as FacultyGrabber
 from models.courses import Course
 from models.Colleges import Colleges
 from models.department import Department
 from models.courseListings import CourseListings
 from models.faculty import Faculty
-from CourseGrabber import scrape_schedule_information
+from _grabbers.CourseGrabber import scrape_schedule_information
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'

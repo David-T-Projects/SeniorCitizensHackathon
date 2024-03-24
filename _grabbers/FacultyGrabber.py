@@ -300,7 +300,7 @@ def populateFaculty():
     # Initialize the WebDriver
     driver = webdriver.Chrome(options=chrome_options)
 
-    with open('faculty_links.txt', 'r') as file:
+    with open('_grabbers/faculty_links.txt', 'r') as file:
         links = file.readlines()
 
     for link in links:
