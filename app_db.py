@@ -27,7 +27,7 @@ def getAllCourses():
 def getAllColleges():
     colleges = Colleges.query.all() #Query all colleges from the database
     #convert the colleges to a list of dictionaries for JSON serialization
-    college_data = [{'name': colleges.name, 'short name': colleges.short_form} for colleges in colleges]
+    college_data = [{'name': colleges.name} for colleges in colleges]
     return jsonify(college_data)
 
 @app.route('/majors')
@@ -46,6 +46,14 @@ def getAllDepartments():
     department_data = [{'name':departments.name, 'abbreviation':departments.abbreviation, 'college':departments.college_name} for departments in departments]
     return jsonify(department_data)
 
+'''
+@app.route('/departments/filter/<course_name>')
+def getFilteredDepartments(college_name):
+    departments = Department.query.filter_by(short_form = college_name).all()
+    department_data = [{'name':departments.name, 'abbreviation':departments.abbreviation, 'college':departments.college_name} for departments in departments]
+    return jsonify(department_data)
+'''
+    
 @app.route('/faculty')
 def getAllFaculty():
     faculty = Faculty.query.all()
