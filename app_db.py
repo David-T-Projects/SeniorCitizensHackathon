@@ -65,10 +65,10 @@ if __name__ == '__main__':
         # Drop existing tables, create new ones, and populate data
         db.drop_all()
         db.create_all()
-        DeptGrabber.getCourses()
-        ProgramGrabber.getPrograms()
+        #DeptGrabber.getCourses()
+        #ProgramGrabber.getPrograms()
         FacultyGrabber.populateFaculty()
-        scrape_schedule_information()
+        #scrape_schedule_information()
         
     # Start Flask server after database preparation
     app.run(debug=True, use_reloader=False)

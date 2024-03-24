@@ -1,5 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 
 #Added DB Support - Caleb
@@ -7,7 +9,8 @@ from extensions import db
 from models import faculty
 
 
-def getFaculty(url):
+def getFaculty(url,id):
+    driver = webdriver.Chrome()
     driver.get(url)
 
     # Find the div element
@@ -284,7 +287,8 @@ def getFaculty(url):
         # print("\n")
 
         #missing department = department
-        facultyEntry = faculty.Faculty(name = fullName, positions = position, 
+        id+=1
+        facultyEntry = faculty.Faculty(id = id,name = fullName, positions = position, 
                                        officeLocation = officeLocation, phoneNumber = phoneNumber,
                                        emailAddress = email)
         db.session.add(facultyEntry)
@@ -301,8 +305,10 @@ def populateFaculty():
     with open('faculty_links.txt', 'r') as file:
         links = file.readlines()
 
+    id =  1
     for link in links:
-        getFaculty(link)
+        id +=1
+        getFaculty(link, id)
 
     # Close the WebDriver
     driver.quit()
