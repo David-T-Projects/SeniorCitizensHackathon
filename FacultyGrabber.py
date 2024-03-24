@@ -9,8 +9,7 @@ from extensions import db
 from models import faculty
 
 
-def getFaculty(url,id):
-    driver = webdriver.Chrome()
+def getFaculty(url,id, driver):
     driver.get(url)
 
     # Find the div element
@@ -287,8 +286,7 @@ def getFaculty(url,id):
         # print("\n")
 
         #missing department = department
-        id+=1
-        facultyEntry = faculty.Faculty(id = id,name = fullName, positions = position, 
+        facultyEntry = faculty.Faculty(name = fullName, positions = position, 
                                        officeLocation = officeLocation, phoneNumber = phoneNumber,
                                        emailAddress = email)
         db.session.add(facultyEntry)
@@ -305,10 +303,8 @@ def populateFaculty():
     with open('faculty_links.txt', 'r') as file:
         links = file.readlines()
 
-    id =  1
     for link in links:
-        id +=1
-        getFaculty(link, id)
+        getFaculty(link, id, driver)
 
     # Close the WebDriver
     driver.quit()

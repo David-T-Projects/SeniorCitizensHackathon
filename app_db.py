@@ -8,6 +8,7 @@ from models.courses import Course
 from models.Colleges import Colleges
 from models.department import Department
 from models.courseListings import CourseListings
+from models.faculty import Faculty
 from CourseGrabber import scrape_schedule_information
 
 app = Flask(__name__)
@@ -42,7 +43,16 @@ def getAllDepartments():
     department_data = [{'name':departments.name, 'abbreviation':departments.abbreviation, 'college':departments.college_name} for departments in departments]
     return jsonify(department_data)
 
-# @app.route('/faculty')
+@app.route('/faculty')
+def getAllFaculty():
+    faculty = Faculty.query.all()
+    faculty_data = [{'name':fac.name, 
+                     'Department':fac.department, 
+                     'Position':fac.positions, 
+                     'Phone Number':fac.positions, 
+                     'email':fac.emailAddress,} 
+                     for fac in faculty]
+    return jsonify(faculty_data)
 
 # @app.route('/events')
 
