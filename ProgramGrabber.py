@@ -18,10 +18,9 @@ def getPrograms():
     try:
         # Wait for the element with catalog to appear
         catalog_element = WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "style__header___2lB0y style__headerExpandable___2d4hu"))
+            EC.presence_of_element_located((By.CLASS_NAME, "style__collapsibleBox___15waq"))
         )
-
-        catalog_div = driver.find_element(By.CLASS_NAME, "style__header___2lB0y style__headerExpandable___2d4hu")
+        catalog_div = driver.find_element(By.CLASS_NAME, "style__topLevelPanelWrapper___1adT-")
 
         div_elements = driver.find_elements(By.CLASS_NAME, "style__collapsibleBox___15waq")
 
@@ -46,7 +45,8 @@ def getPrograms():
             list_content= list_content.split('\n')[0]
             
             list_colleges.append(list_content)
-            print(list_content)
+        print(list_colleges)
+        print()
 
         i = 0
         for link in links:
@@ -57,10 +57,10 @@ def getPrograms():
             driver.get(url)
 
             catalog_element = WebDriverWait(driver, 30).until(
-                EC.presence_of_element_located((By.CLASS_NAME, "style__topLevelPanelWrapper___1adT-"))
+                EC.presence_of_element_located((By.CLASS_NAME, "style__topLevelPanel___3yI6z"))
             )
 
-            catalog_div = driver.find_element(By.CLASS_NAME, "style__topLevelPanelWrapper___1adT-")
+            catalog_div = driver.find_element(By.CLASS_NAME, "style__topLevelPanel___3yI6z")
 
             # Find all anchor elements within the div
             link_elements = catalog_div.find_elements(By.TAG_NAME, "a")
@@ -68,23 +68,17 @@ def getPrograms():
             # Extract the href attribute from each link element
             links = [link.get_attribute("href") for link in link_elements]
             
-            '''
-            for link in link_elements: 
-                driver.get(url)
+            programs_list = []
 
-                # Get the catalog element
-                list_element = WebDriverWait(driver, 30).until(
-                    EC.presence_of_element_located((By.CLASS_NAME, "style__collapsibleBox___15waq"))
-                )
-
-                # Get the text from the div element
-                list_text = list_element.text
+            for element in link_elements:
+                # Extract information from each list element
+                content = element.text
                 
-                # Print the text
-                print("List inside the div:")
-                print(list_text)
-                print()  # Print an empty line for clarity
-                '''
+                programs_list.append(content)
+                
+            print(programs_list)  
+            print()  
+                
 
     finally:
         # Remember to close the WebDriver when you're done
