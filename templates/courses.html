@@ -22,7 +22,16 @@
 <body>
     <h1>List of Courses</h1>
     <a href="http://localhost:5001/">Back to index</a> <!-- Back button -->
-    <input type="text" id="searchInput" onkeyup="searchDepartment()" placeholder="Filter by department">
+    <select id="departmentSelect" onchange="filterByDepartment()">
+        <option value="">Select Department</option>
+        {% set departments = [] %}
+        {% for course in data %}
+            {% if course.department not in departments %}
+                {% set _ = departments.append(course.department) %}
+                <option value="{{ course.department }}">{{ course.department }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
     <table id="courses-table">
         <thead>
             <tr>
@@ -41,17 +50,17 @@
     </table>
 
     <script>
-        function searchDepartment() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("searchInput");
-            filter = input.value.toUpperCase();
+        function filterByDepartment() {
+            var select, filter, table, tr, td, i, txtValue;
+            select = document.getElementById("departmentSelect");
+            filter = select.value.toUpperCase();
             table = document.getElementById("courses-table");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1];
+                td = tr[i].getElementsByTagName("td")[1]; // Index 1 for department column
                 if (td) {
                     txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    if (filter === "" || txtValue.toUpperCase() === filter) {
                         tr[i].style.display = "";
                     } else {
                         tr[i].style.display = "none";
