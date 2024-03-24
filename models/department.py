@@ -12,8 +12,12 @@ class Department(db.Model):
     __tablename__ = 'department'
 
     name = db.Column(db.String(255), nullable = False, primary_key = True)
-    abbreviation = db.Column(db.String(255), nullable = False, primary_key = True)
-    college = db.Column(db.String(255), nullable = False, foreign_key = True)
+    abbreviation = db.Column(db.String(255), default=None)
+    # college = db.Column(db.String(255), default=None)
+
+
+    college = db.relationship('Colleges', uselist = False, backref = 'colleges' ,lazy = True)
+    college_name = db.Column(db.String(255), db.ForeignKey('colleges.name'), nullable=True)
 
     def __repr__(self):
         return '<Department %r>' % self.name
