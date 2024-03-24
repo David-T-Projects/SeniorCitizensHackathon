@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Majors</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>List of Majors</h1>
+    <a href="/">Back to Main Endpoint</a>
+    <table id="majors-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Program Type</th>
+                <th>College</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for major in data %}
+            <tr>
+                <td>{{ major.name }}</td>
+                <td>{{ major['program type'] }}</td>
+                <td>{{ major.college }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        // You can include JavaScript here if needed
+    </script>
+</body>
+</html>

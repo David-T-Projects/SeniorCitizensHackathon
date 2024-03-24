@@ -40,7 +40,8 @@ def getAllMajors():
     major_data = [{'name': major.name,
                    'program type': major.degreeType,
                    'college': major.college} for major in majors]
-    return jsonify(major_data)
+    # return jsonify(major_data)
+    return render_template('majors.html', data=major_data)
     
 
 @app.route('/department')
@@ -90,7 +91,8 @@ def list_endpoints():
         '/courses',
         '/colleges',
         '/courselistings',
-        '/faculty'
+        '/faculty',
+        '/majors'
         # Add more endpoints as needed
     ]
     return render_template('endpoints.html', endpoints=endpoints)
