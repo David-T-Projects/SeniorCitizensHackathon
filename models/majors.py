@@ -8,9 +8,9 @@ class Majors(db.Model):
 
     name = db.Column(db.String(255), nullable = False, primary_key = True)
     creditHours = db.Column(db.Integer, nullable = False)
-    degreeType = db.Column(db.String(255), nullable = False)
-    concentration = db.Column(db.ARRAY(String(255)), nullable = False)
-    department = db.Column(db.String(255), nullable = False)
+    degreeType = db.Column(db.String(255))
+    option = db.Column(db.String(255), default = "Major")
+    department_name = db.Column(db.String(255), nullable = False)
     college = db.Column(db.String(255), nullable = False)
 
     def __repr__(self):

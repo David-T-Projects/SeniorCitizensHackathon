@@ -8,8 +8,11 @@ class Colleges(db.Model):
     __tablename__ = 'colleges'
 
     name = db.Column(db.String(255), nullable = False, primary_key = True)
-    department = db.Column(db.ARRAY(String(255)), nullable = False)
-    scholarships = db.Column(db.ARRAY(String(255)), nullable = False)
+    
+    
+    #department = db.Column(db.ARRAY(String(255)), nullable = False)
+    
+    #scholarships = db.Column(db.ARRAY(String(255)), default = None)
 
     def __repr__(self):
         return '<Colleges %r>' % self.name
