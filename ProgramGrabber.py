@@ -4,7 +4,29 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from extensions import db
 from models.Colleges import Colleges
+from models.majors import Majors
 
+def populateMajors(college, program):
+    college_trimmed = college.replace("College of", " ")
+    college_trimmed = college_trimmed.strip()
+
+    program = program.replace ("- ", "")
+    program_arr = program.split("(")
+    name = program_arr[0]
+    try:
+        degree = program_arr[1]
+        degreeType = degree.split(")")
+        print(name + ' ' + degreeType)
+        new_program = Majors(name = name, degreeType = degreeType[0],college=college_trimmed)
+    except:
+        degreeType = None
+        new_program = Majors(name = name, degreeType=None , college=college_trimmed)
+    
+    db.session.add(new_program)
+    db.session.commit()
+
+
+    
 def getPrograms():
     # Initialize a WebDriver (make sure you have the appropriate driver installed and in your PATH)
     driver = webdriver.Chrome()  # Change this to the appropriate WebDriver for your browser
@@ -50,9 +72,6 @@ def getPrograms():
             db.session.add(Colleges(name=list_content))
             db.session.commit()
 
-        print(list_colleges)
-        print()
-
         i = 0
         for link in links:
             # Get the URL of the link
@@ -80,9 +99,9 @@ def getPrograms():
                 content = element.text
                 
                 programs_list.append(content)
+                populateMajors(list_colleges[i], content)
                 
-            print(programs_list)  
-            print()  
+            i+=1
                 
 
     finally:
