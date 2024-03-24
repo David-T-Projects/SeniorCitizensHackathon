@@ -1,7 +1,8 @@
 from flask import *
 from datetime import time
 from extensions import db
-import DataGrabber
+import DeptGrabber
+import ProgramGrabber
 from models.courses import Course
 
 app = Flask(__name__)
@@ -30,7 +31,9 @@ if __name__ == '__main__':
         # Drop existing tables, create new ones, and populate data
         db.drop_all()
         db.create_all()
-        DataGrabber.getCourses()
+        DeptGrabber.getCourses()
+        ProgramGrabber.getPrograms()
+
     
     # Start Flask server after database preparation
     app.run(debug=True, use_reloader=False)

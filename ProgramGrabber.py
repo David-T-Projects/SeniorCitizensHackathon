@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from extensions import db
-from models.courses import Course
+from models.Colleges import Colleges
 
 def getPrograms():
     # Initialize a WebDriver (make sure you have the appropriate driver installed and in your PATH)
@@ -36,6 +36,7 @@ def getPrograms():
             print(link)
 
         list_colleges = []
+        college_count = 0
         
         # Iterate through the list elements
         for div in div_elements:
@@ -45,6 +46,10 @@ def getPrograms():
             list_content= list_content.split('\n')[0]
             
             list_colleges.append(list_content)
+
+            db.session.add(Colleges(name=list_content))
+            db.session.commit()
+
         print(list_colleges)
         print()
 
@@ -83,5 +88,3 @@ def getPrograms():
     finally:
         # Remember to close the WebDriver when you're done
         driver.quit()
-
-getPrograms()
